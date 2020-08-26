@@ -25,9 +25,15 @@ def main(tmx_filename, map_filename):
         for x in range(0, WIDTH):
             tile = int(tiles_line.split(",")[x])
             if tile > 0:
-                lineout += str(hex(tile - 1))[2:]
+                # Trim '0x' prefix.
+                hextile = str(hex(tile - 1))[2:]
+                # Decimal tile indices must be converted
+                # to two digit hex values.
+                if len(hextile) < 2:
+                    hextile = '0' + hextile
+                lineout += hextile
             else:
-                lineout += '0'
+                lineout += '00'
 
         output += lineout + "\n"
 
