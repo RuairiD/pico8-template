@@ -1,3 +1,4 @@
+import math
 import sys
 from PIL import Image
 
@@ -26,13 +27,33 @@ PICO8_COLORS = [
 ]
 
 
+def get_rgb_distance(rgb1, rgb2):
+    r1, g1, b1 = rgb1
+    r2, g2, b2 = rgb2
+    return math.sqrt(
+        (r1 - r2)**2 + (g1 - g2)**2 + (b2 - b2)**2,
+    )
+
+
+def get_closest_color_code(rgb):
+    color_distances = (
+        (candidate_rgb, get_rgb_distance(rgb, candidate_rgb))
+        for candidate_rgb
+        in PICO8_COLORS
+    )
+    return sorted(
+        color_distances,
+        key=lambda rgb_distance_pair: rgb_distance_pair[1],
+    )[0][0]
+
+
 def get_color_code(rgb):
     # Default will be black if no colour is found.
     try:
         color_code = PICO8_COLORS.index(rgb)
-        return str(hex(color_code))[2:]
     except ValueError:
-        return '0'
+        color_code = PICO8_COLORS.index(get_closest_color_code(rgb))
+    return str(hex(color_code))[2:]
 
 
 def main(png_filename, gfx_filename):
