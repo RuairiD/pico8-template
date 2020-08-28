@@ -28,11 +28,7 @@ Other installation methods can be found on its own README file.
 * When converting the `sprites.png` file into gfx data, if a pixel's colour is not part of PICO-8's palette, an eligible colour is chosen on a best-effort basis using [RGB distance](https://en.wikipedia.org/wiki/Color_difference#sRGB). These results can be a bit weird, so it's recommended to only use the PICO-8 in `sprites.png` anyway.
 
 ### Updating SFX and Music
-Unlike sprites and maps, this template includes no processing for SFX or music in PICO-8. This template assumes you (like me) create SFX and music in a dummy cart elsewhere and copy them into:
-* `p8_segments/sfx.txt` (SFX)
-* `p8_segments/music.txt` (Music)
-
-(**N.B.** the `__sfx__` and `__music__` headers are added elsewhere; do not include them in the `sfx.txt` and `music.txt` files)
+A dummy `audio.p8` cart exists purely for SFX and music composition. Running `make music` opens the audio cart in PICO-8. Running `save` in PICO-8 (without any filename) will write back any changes. The `make dev` and `make p8` targets pull the SFX and music data from `audio.p8` when building the game.
 
 ### Where can I set the .p8.png label?
-`p8_segments/header.txt`
+`label.txt`
