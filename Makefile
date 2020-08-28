@@ -1,3 +1,5 @@
+pico8 = ~/pico-8/PICO-8.app/Contents/MacOS/pico8
+
 .PHONY: p8
 p8:
 	mkdir -p build
@@ -21,8 +23,8 @@ dev:
 	rm build/map.txt
 	rm build/gfx.txt
 	rm build/audio.txt
-	~/pico-8/PICO-8.app/Contents/MacOS/pico8 -run build/dev.p8
+	$(pico8) -run build/dev.p8
 
 .PHONY: audio
 audio:
-	~/pico-8/PICO-8.app/Contents/MacOS/pico8 -run audio.p8
+	$(pico8) -run audio.p8
